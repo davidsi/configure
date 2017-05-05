@@ -7,10 +7,10 @@ to set up one or more projects do the following:
 3. change the attribs of ./configure/setup.sh to be an executable
 3. run ./configure/setup.sh from the top folder with the following parameters for the projects:
 
-'soc-chippy'   : complete chippy ruxpin project
-'all-boat'     : all arduino, hardware, ios and node repositories for the boat controller
+'chippy-soc'   : complete chippy ruxpin project
+'boat-all'     : all arduino, hardware, ios and node repositories for the boat controller
 'weather-all'  : node and arduino files for weather station 
-'soc-weather'  : just node (chip)  files for weather station 
+'weather-soc'  : just node (chip)  files for weather station 
 'all-arduino'  : all the arduino repositories
 
 for bringing up chip divices to wifi, us the apfd.service file in the config folder

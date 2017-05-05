@@ -7,9 +7,11 @@ fi
 
 # set up the initial files and folders
 #
-echo "cd configure; git stash save; git pull; git stash pop; cd .. " >>git-sync.sh
+echo "cd configure; git stash save; git pull; git stash pop; cd .. " >git-sync.sh
 
-mkdir libs
+if [ ! -d "libs" ]; then
+	mkdir libs
+fi
 
 # now see which repos we need
 #

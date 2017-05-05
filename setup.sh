@@ -23,8 +23,12 @@ while [ "$1" != "" ]; do
 	elif [ -f "configure/$1.sh" ] ; then
 		chmod 777 ./configure/$1.sh 
 		./configure/$1.sh 
+		cd configure
+		git checkout -- $1.sh
+		cd ..
 	else
 		echo $1 shell script NOT found
+		exit
 	fi
 
 	shift

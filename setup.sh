@@ -29,3 +29,5 @@ while [ "$1" != "" ]; do
 
 	shift
 done
+
+chmod 777 ./git-sync.sh

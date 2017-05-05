@@ -1,4 +1,4 @@
-# set up the chippy ruxpin project
+# set up the weather device project
 #
 echo setting up weather-all
 

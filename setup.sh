@@ -7,6 +7,8 @@ fi
 
 # set up the initial files and folders
 #
+chmod 777 ./configure/lib-setup.sh 
+	
 echo "cd configure; git stash save; git pull; git stash pop; cd .. " >git-sync.sh
 
 if [ ! -d "libs" ]; then

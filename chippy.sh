@@ -3,4 +3,4 @@
 echo setting up chippy
 
 ./configure/lib-setup.sh chippy
-./configure/lib-setup.sh libs/node-lib
+./configure/lib-setup.sh lib node-lib

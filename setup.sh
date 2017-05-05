@@ -18,7 +18,7 @@ fi
 while [ "$1" != "" ]; do
 	if [ "$1" == "help" ] ; then
 		cat configure/help.txt
-	elif [ -f "$1.sh" ] ; then
+	elif [ -f "configure/$1.sh" ] ; then
 		chmod 777 ./configure/$1.sh 
 		./configure/$1.sh 
 	else

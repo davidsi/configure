@@ -2,7 +2,6 @@
 #
 echo setting up chippy
 
-cd ..
 git clone https://github.com/davidsi/chippy.git 
 
 cd ../libs

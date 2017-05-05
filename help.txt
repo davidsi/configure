@@ -39,5 +39,6 @@ the following are archived
 	chip-controller
 	development     : this is the archive
 
+each repository has an optional configure.sh file which will be run when it is set up. In the case of the node based repo's, it will contain the list of NPM modules required.
 
 

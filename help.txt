@@ -1,0 +1,9 @@
+
+this is the master setup repository for all the projects
+to set up one or more projects do the following:
+
+1. create a master folder that will contain all the projects
+2. clone https://github.com/davidsi/configure.git to a sub folder called "configure"
+3. run ./configure/setup.sh from the top folder with the following parameters for the projects:
+
+'chippy' : complete chippy ruxpin project

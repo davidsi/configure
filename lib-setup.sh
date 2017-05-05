@@ -19,6 +19,7 @@ elif  [ "$1" == "lib" ]; then
 		echo "$2 repo already present"
 	fi
 else
+	echo "configuration $1 $2 not recognized"
 fi
 
 

@@ -24,7 +24,7 @@ if [ ! -d $folder/$target ]; then
 	# get the git repro
 	#
 	git clone https://github.com/davidsi/$target.git $folder/$target
-	echo "cd $folder/$target; git stash save; git pull; git stash pop; cd $toRoot ">>git-sync.sh
+	echo "cd $folder/$target; echo;pwd;git stash save; git pull; git stash pop; cd $toRoot ">>git-sync.sh
 
 	if [ -f "$folder/$target/configure.sh" ]; then
 

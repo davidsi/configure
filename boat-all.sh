@@ -7,5 +7,6 @@
 ./configure/lib-setup.sh boat-arduino
 ./configure/lib-setup.sh boat-devices
 ./configure/lib-setup.sh boat-ios
+./configure/lib-setup.sh boat-server
 
 ./configure/lib-setup.sh hardware

@@ -9,7 +9,7 @@ fi
 #
 chmod 777 ./configure/lib-setup.sh 
 	
-echo "cd configure; git stash save; git pull; git stash pop; cd .. " >git-sync.sh
+echo "clear;cd configure; echo;pwd;git stash save; git pull; git stash pop; cd .. " >git-sync.sh
 
 if [ ! -d "libs" ]; then
 	mkdir libs

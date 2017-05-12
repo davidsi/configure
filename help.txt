@@ -12,6 +12,7 @@ to set up one or more projects do the following:
 'weather-all'  : node and arduino files for weather station 
 'weather-soc'  : just node (chip)  files for weather station 
 'all-arduino'  : all the arduino repositories
+'all'          : everything
 
 for bringing up chip divices to wifi, us the apfd.service file in the config folder
 
@@ -26,6 +27,7 @@ the repositories are used as follows:
 	'boat-arduino'    : all arduino projects for the boat controller
 	'boat-devices'    : devices (node) running on a laptop, or base code such as nodeBaseServer that can be copied
 	'boat-ios'        : ios controller for boat controller
+	'boat-server'     : the server for the boat, connects all devices, iOS, iKommunicate etc
 	'chippy'		  : chippy ruxpin node code
 	'configure'       : master setup
 	'gmail-example'   : for creating apps transmitting by mail, such as the qcyc fleet captain app

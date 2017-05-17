@@ -13,13 +13,55 @@ var originalRootDir = undefined;
 var rootDir         = undefined;
 var configDir       = undefined;
 var libsDir         = undefined;
-var syncFoldersm    = undefined;
+var syncFolders     = undefined;
 var npmModules      = undefined;
 var setupModel      = undefined;
 
 moveToRoot( process.argv[1] );
 getScriptObjectsFromFiles();
 parseArgs( process.argv.slice(2) );
+
+/*************************************************************************************************************
+ * set up a git repo
+ */
+function setupGit( folder, repoName ) {
+
+	// Run external tool synchronously 
+	//
+	console.log( 'cloning ' +  'git clone https://github.com/davidsi/'+repoName+'.git '+folder+repoName );
+
+	// if( shelljs.exec('git clone https://github.com/davidsi/'+repoName+'.git '+'folder'+repoName).code !== 0 ) {
+ //  		console.log('Error: Git commit failed');
+ //  		shelljs.exit(1);
+	// }
+}
+
+/*************************************************************************************************************
+ * set up a config
+ */
+function setupConfig( data ) {
+
+	var gitLibs = data["git-libs"];
+	var git     = data["git"];
+
+	console.log( "git libs: ");
+	gitLibs.map( function( libRepro ) {
+		setupGit( libsDir, libRepro );
+		syncFolders["libs"].push( libRepro );
+	});
+
+	console.log( "git: ");
+	git.map( function( repro ) {
+		setupGit( rootDir, repro );
+		syncFolders["main"].push( repro );
+	});
+
+	var rawSyncData = JSON.stringify( syncFolders );
+
+	fs.writeFileSync( configDir + "git-sync.json", rawSyncData, {'encoding' : 'utf8' } );
+
+	shelljs.cd( rootDir );
+}
 
 /*************************************************************************************************************
  * parse the arguments
@@ -39,7 +81,7 @@ function parseArgs( args) {
 			console.log( "can not find setup info for " + arg );
 		}
 		else {
-			console.log( "setup data for " + arg + " = " + JSON.stringify( data ) );
+			setupConfig( data );
 		}
 	});
 
@@ -75,8 +117,7 @@ function getScriptObjectsFromFiles() {
 	// see if the main sync script exists, if it does, read it in. If not, well, don't :-)
 	//
 	syncFolders = getFile( configDir + "git-sync.json", function() {
-		var object = new Array();
-		object.push( "configure" );
+		var object = { "main" : ["configure"], "libs" : []} ;
 		return object;
 
 	});

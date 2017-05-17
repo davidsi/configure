@@ -1,0 +1,21 @@
+{
+	"boat-all": {
+		"git": ["weather-station", "boat-arduino", "boat-devices", "boat-ios", "boat-server", "hardware"],
+		"git-libs": ["node-lib", "arduino-lib"]
+	},
+	"chippy-soc": {
+		"git": []
+	},
+	"weather-all": {
+		"git": []
+	},
+	"weather-soc": {
+		"git": []
+	},
+	"all-arduino": {
+		"git": []
+	},
+	"all": {
+		"git": []
+	}
+}

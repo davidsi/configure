@@ -4,8 +4,9 @@ to set up one or more projects do the following:
 
 1. create a master folder that will contain all the projects
 2. clone https://github.com/davidsi/configure.git to a sub folder called "configure"
-3. change the attribs of ./configure/setup.sh to be an executable
-3. run ./configure/setup.sh from the top folder with the following parameters for the projects:
+3. make sure you have export DMS-ROOT=~/github set!
+4. change the attribs of ./configure/setup.sh to be an executable
+5. run ./configure/setup.sh from the top folder with the following parameters for the projects:
 
 'chippy-soc'   : complete chippy ruxpin project
 'boat-all'     : all arduino, hardware, ios and node repositories for the boat controller

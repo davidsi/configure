@@ -1,0 +1,18 @@
+# Logs
+*.log
+
+# Runtime data
+.DS_Store
+pids
+*.pid
+*.seed
+buffer/
+.setup
+
+# omit files we create during the setup process
+git-sync.json
+npmModules.json
+
+#old files we are keeping for now
+old/
+

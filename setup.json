@@ -1,4 +1,16 @@
 {
+	"all": {
+		"git": ["boat-arduino", "boat-devices", "boat-ios", "boat-server", "chippy", "gmail-example", "hardware", "rov-arduino", "rov-node", "weather-station"],
+		"git-libs": ["node-lib", "arduino-lib"]
+	},
+	"arduino-all": {
+		"git": ["boat-arduino", "rov-arduino"],
+		"git-libs": ["arduino-lib"]
+	},
+	"big-red-button" : {
+		"git": ["big-red-button"],
+		"git-libs": ["node-lib"]
+	}
 	"boat-all": {
 		"git": ["weather-station", "boat-arduino", "boat-devices", "boat-ios", "boat-server", "hardware"],
 		"git-libs": ["node-lib", "arduino-lib"]
@@ -7,28 +19,20 @@
 		"git": ["chippy"],
 		"git-libs": ["node-lib"]
 	},
-	"weather-all": {
-		"git": ["weather-station", "boat-arduino"],
-		"git-libs": ["node-lib", "arduino-lib"]
-	},
-	"weather-soc": {
-		"git": ["weather-station"],
-		"git-libs": ["node-lib"]
-	},
-	"arduino-all": {
-		"git": ["boat-arduino", "rov-arduino"],
-		"git-libs": ["arduino-lib"]
-	},
-	"all": {
-		"git": ["boat-arduino", "boat-devices", "boat-ios", "boat-server", "chippy", "gmail-example", "hardware", "rov-arduino", "rov-node", "weather-station"],
-		"git-libs": ["node-lib", "arduino-lib"]
-	},
 	"rov-all" : {
 		"git": ["rov-arduino", "rov-node"],
 		"git-libs": ["node-lib", "arduino-lib"]
 	},
 	"rov-soc" : {
 		"git": ["rov-node"],
+		"git-libs": ["node-lib"]
+	},
+	"weather-all": {
+		"git": ["weather-station", "boat-arduino"],
+		"git-libs": ["node-lib", "arduino-lib"]
+	},
+	"weather-soc": {
+		"git": ["weather-station"],
 		"git-libs": ["node-lib"]
 	}
 }

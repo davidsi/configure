@@ -5,26 +5,42 @@ to set up one or more projects do the following:
 1. create a master folder that will contain all the projects
 2. clone https://github.com/davidsi/configure.git to a sub folder called "configure"
 3. make sure you have export DMS-ROOT=~/github set!
-4. change the attribs of ./configure/setup.sh to be an executable
-5. run ./configure/setup.sh from the top folder with the following parameters for the projects:
+4. run init.sh, this will set up the correct NPM files for the main script
+	a. YOU MUST RUN THIS FROM THE "ROOT", not the configure directory
+	b. you may need to run as sudo
+	c. you will need to change the attribs of init.sh to be an executable
+5. run node ./configure/configure.js 
+	a. you may need to run as sudo
+	b. args: 
+		--help
+		--gitSync
+		--gitStatus
+		--npm
+		<setup>
 
-'chippy-soc'   : complete chippy ruxpin project
-'boat-all'     : all arduino, hardware, ios and node repositories for the boat controller
-'weather-all'  : node and arduino files for weather station 
-'weather-soc'  : just node (chip)  files for weather station 
-'all-arduino'  : all the arduino repositories
-'all'          : everything
+setup can be one or more of the following (from setup.json):
+	'all'          : everything
+	'arduino-all   : all the arduino repositories
+	'boat-all'     : all arduino, hardware, ios and node repositories for the boat controller
+	'chippy-soc'   : complete chippy ruxpin project
+	'rov-all'	   : all the ROV project
+	'rov-soc'	   : just the node (chip) files for the ROV project
+	'weather-all'  : node and arduino files for weather station 
+	'weather-soc'  : just node (chip)  files for weather station 
 
-for bringing up chip divices to wifi, us the apfd.service file in the config folder
-
-typically repositories are 
+----------------------------------------------------------------------------------------------------------------------------
+typically repositories names are 
 	XXX-lib     : the library for the language
 	XXX-arduino	: all the arduino code for the project as they tend to be built on the laptop
+	XXX-ios	    : for ios apps
 	XXX         : node code for SOC devices that only require their own code
                 : should name these XXX-node
 
+----------------------------------------------------------------------------------------------------------------------------
 the repositories are used as follows:
 	'arduino-lib'     : arduino library functions
+	'node-lib'		  : node library
+
 	'boat-arduino'    : all arduino projects for the boat controller
 	'boat-devices'    : devices (node) running on a laptop, or base code such as nodeBaseServer that can be copied
 	'boat-ios'        : ios controller for boat controller
@@ -33,7 +49,6 @@ the repositories are used as follows:
 	'configure'       : master setup
 	'gmail-example'   : for creating apps transmitting by mail, such as the qcyc fleet captain app
 	'hardware'        : 3d print and scematics
-	'node-lib'		  : node library
 	'rov-arduino'     : arduino section of the rov
 	'rov-node'		  : node section of ROV - includes both controller and sub
 	'weather-station' : the chip (node) code for the weather device
@@ -42,6 +57,6 @@ the following are archived
 	chip-controller
 	development     : this is the archive
 
-each repository has an optional configure.sh file which will be run when it is set up. In the case of the node based repo's, it will contain the list of NPM modules required.
+each repository has an optional configure.json file which will be run when it is set up. In the case of the node based repo's, it will contain the list of NPM modules required.
 
 

@@ -123,13 +123,9 @@ function doOneGitSync( repo ) {
 	shelljs.cd( repo );
 
 	if( shelljs.exec('git stash save' ).code !== 0 ) {
-  		console.log('Error: Git stash save failed for ' + repo );
-  		shelljs.exit(1);
 	}
 
 	if( shelljs.exec('git pull' ).code !== 0 ) {
-  		console.log('Error: Git pull failed for ' + repo );
-  		shelljs.exit(1);
 	}
 
 	if( shelljs.exec('git stash pop' ).code !== 0 ) {
@@ -137,13 +133,9 @@ function doOneGitSync( repo ) {
 	}
 
 	if( shelljs.exec('git commit -a -m "automated commit" ' ).code !== 0 ) {
-  		console.log('Error: Git commit failed for ' + repo );
-  		shelljs.exit(1);
 	}
 
 	if( shelljs.exec('git push' ).code !== 0 ) {
-  		console.log('Error: Git push failed for ' + repo );
-  		shelljs.exit(1);
 	}
 }
 

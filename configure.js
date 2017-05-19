@@ -59,7 +59,7 @@ function doSetup( folder, repo, syncKey ) {
 	var target     = folder + repo;
 	var repoConfig = getJSonObjectFromFile( target + "/" + "config.json", function() {
 
-		console.log( "no config for " + repo );
+		console.log( "no config for " + repo + " at " + target + "/" + "config.json" );
 		return undefined;
 	});
 

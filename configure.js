@@ -119,6 +119,7 @@ function setupConfig( data ) {
 
 function doOneGitSync( repo ) {
 
+	console.log( "doing git sync for " + repo );
 	shelljs.cd( repo );
 
 	if( shelljs.exec('git stash save' ).code !== 0 ) {
@@ -132,8 +133,6 @@ function doOneGitSync( repo ) {
 	}
 
 	if( shelljs.exec('git stash pop' ).code !== 0 ) {
-  		console.log('Error: Git stash pop failed for ' + repo );
-  		shelljs.exit(1);
 	}
 
 	if( shelljs.exec('git commit -a -m "automated commit" ' ).code !== 0 ) {

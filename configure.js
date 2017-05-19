@@ -181,6 +181,25 @@ function doGitStatus() {
 }
 
 /*************************************************************************************************************
+ * update / install the npm modules required
+ */
+function doNpmUpdate() {
+
+	npmModules.forEach( function( modName ) {
+
+		if( fs.existsSync( rootDir + "node_modules/" + modName ) ) {
+			console.log( modName + " already installed, doing an update" );
+			shelljs.exec('npm update -g ' + modName );
+		}
+		else {
+			console.log( "installing " + modName );
+			shelljs.exec('npm install -g ' + modName );
+			shelljs.exec('npm link ' + modName );
+		}
+	});
+}
+
+/*************************************************************************************************************
  * parse the arguments
  */
 function parseArgs( args) {
@@ -199,6 +218,11 @@ function parseArgs( args) {
 
 		if( arg == "--gitStatus" ) {
 			doGitStatus();
+			return;
+		}
+
+		if( arg == "--npm" ) {
+			doNpmUpdate();
 			return;
 		}
 

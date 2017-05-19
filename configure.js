@@ -152,11 +152,11 @@ function doOneGitSync( repo ) {
 function doGitSync() {
 
 	syncFolders["main"].forEach( function( repo ) {
-		doOneGitSync( rootDir + "/" + repo );
+		doOneGitSync( rootDir + repo );
 	});
 
 	syncFolders["libs"].forEach( function( repo ) {
-		doOneGitSync( libsDir + "/" + repo );
+		doOneGitSync( libsDir + repo );
 	});
 }
 

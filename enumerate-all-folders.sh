@@ -5,6 +5,7 @@ for f in *; do
         cd $f
         pwd
         ../configure/check-git.sh
+        
         cd ..
     fi
 done

@@ -16,24 +16,79 @@ var libsDir         = undefined;
 var syncFolders     = undefined;
 var npmModules      = undefined;
 var setupModel      = undefined;
+var newNpmModules   = [];
 
 moveToRoot( process.argv[1] );
 getScriptObjectsFromFiles();
 parseArgs( process.argv.slice(2) );
+writeScriptObjectsToFiles();
+shelljs.cd( rootDir );
 
 /*************************************************************************************************************
  * set up a git repo
  */
 function setupGit( folder, repoName ) {
 
-	// Run external tool synchronously 
-	//
-	console.log( 'cloning ' +  'git clone https://github.com/davidsi/'+repoName+'.git '+folder+repoName );
+	var target = folder + repoName;
 
-	// if( shelljs.exec('git clone https://github.com/davidsi/'+repoName+'.git '+'folder'+repoName).code !== 0 ) {
- //  		console.log('Error: Git commit failed');
- //  		shelljs.exit(1);
-	// }
+	if( fs.existsSync( target ) ) {
+		console.log( target + "already exists, skipping" );
+	}
+	else {
+
+		// Run external tool synchronously 
+		//
+		console.log( 'cloning ' +  'git clone https://github.com/davidsi/'+repoName+'.git '+target );
+
+		if( shelljs.exec('git clone https://github.com/davidsi/'+repoName+'.git '+'folder'+repoName).code !== 0 ) {
+	  		console.log('Error: Git commit failed');
+	  		shelljs.exit(1);
+		}
+
+		syncFolders[ syncKey].push( repo );
+	}
+}
+
+/*************************************************************************************************************
+ * set up a repp
+ */
+function doSetup( folder, repo, syncKey ) {
+
+	setupGit( folder, repo );
+
+	var target     = folder + repo;
+	var repoConfig = getJSonObjectFromFile( target + "/" + "config.json", function() {
+
+		console.log( "no config for " + repo );
+		return undefined;
+	});
+
+	if( repoConfig !== undefined ) {
+
+		if( repoConfig["npm"] !== undefined ) {
+			console.log( "npm list for " + repo + " = " + JSON.stringify( repoConfig["npm"] ) );
+
+		npmModules = npmModules.concat( repoConfig["npm"].filter( newModule => {
+
+			if( npmModules.indexOf(newModule) < 0 ) {
+				console.log( "adding " + newModule + " to npm list" );
+			}
+			return( npmModules.indexOf(newModule) < 0 );
+    	}));
+
+//
+// can't use this unless we can concat arrays
+// let filteredSet = repoConfig["npm"].all.filter(newModule => {
+//       return (npmModules.indexOf(newModule) <0 );
+//     })
+//    
+			// repoConfig["npm"].forEach( function( newModule ) {
+			// 	if( npmModules.indexOf( newModule ) < 0 ) {
+			// 		npmModules.push( newModule );
+			// 	}
+			// });
+		}
+	}
 }
 
 /*************************************************************************************************************
@@ -46,21 +101,13 @@ function setupConfig( data ) {
 
 	console.log( "git libs: ");
 	gitLibs.map( function( libRepro ) {
-		setupGit( libsDir, libRepro );
-		syncFolders["libs"].push( libRepro );
+		doSetup( libsDir, libRepro, "libs" );
 	});
 
 	console.log( "git: ");
 	git.map( function( repro ) {
-		setupGit( rootDir, repro );
-		syncFolders["main"].push( repro );
+		doSetup( rootDir, repro, "main" );
 	});
-
-	var rawSyncData = JSON.stringify( syncFolders );
-
-	fs.writeFileSync( configDir + "git-sync.json", rawSyncData, {'encoding' : 'utf8' } );
-
-	shelljs.cd( rootDir );
 }
 
 /*************************************************************************************************************
@@ -94,6 +141,18 @@ function parseArgs( args) {
 /*************************************************************************************************************
  * get the objects we need from the json in the files
  */
+function writeScriptObjectsToFiles() {
+
+	var raw = JSON.stringify( syncFolders );
+	fs.writeFileSync( configDir + "git-sync.json", raw, { "encoding" : "utf8" } );
+
+	raw = JSON.stringify( npmModules );	
+	fs.writeFileSync( configDir + "npmModules.json", raw, { "encoding" : "utf8" } );
+}
+
+/*************************************************************************************************************
+ * get the objects we need from the json in the files
+ */
 function getScriptObjectsFromFiles() {
 
 	//
@@ -116,7 +175,7 @@ function getScriptObjectsFromFiles() {
 
 	// see if the main sync script exists, if it does, read it in. If not, well, don't :-)
 	//
-	syncFolders = getFile( configDir + "git-sync.json", function() {
+	syncFolders = getJSonObjectFromFile( configDir + "git-sync.json", function() {
 		var object = { "main" : ["configure"], "libs" : []} ;
 		return object;
 
@@ -126,7 +185,7 @@ function getScriptObjectsFromFiles() {
 
 	// get the npm modules list
 	//
-	npmModules = getFile( configDir + "npmModules.json", function() {
+	npmModules = getJSonObjectFromFile( configDir + "npmModules.json", function() {
 
 		var object = new Array();
 		object.push( "fs" );
@@ -140,7 +199,7 @@ function getScriptObjectsFromFiles() {
 
 	// get the json file that contains the various requirements for each possible setup
 	//
-	setupModel = getFile( configDir + "setup.json", function() {
+	setupModel = getJSonObjectFromFile( configDir + "setup.json", function() {
 
 		console.log( "Can not continue, no setup.json." );
 		process.exit(1);
@@ -188,14 +247,19 @@ function moveToRoot( thisScriptPath ) {
 /*************************************************************************************************************
  * get raw json out of a file and attach to an object. If it does not exist, create an empty object
  */
-function getFile( fileName, createEmpty ) {
+function getJSonObjectFromFile( fileName, createEmpty ) {
 
 	if( fs.existsSync( fileName ) ) {
 		var rawJson = fs.readFileSync( fileName );
 		return JSON.parse( rawJson );
 	}
 	else {
-		return createEmpty();
+		if( createEmpty ) {
+			return createEmpty();
+		}
+		else {
+			return new Object();
+		}
 	}
 }
 

@@ -140,6 +140,19 @@ function doOneGitSync( repo ) {
 }
 
 /*************************************************************************************************************
+ * do the git sync for one folder
+ */
+
+function doOneGitStatus( repo ) {
+
+	console.log( "\n\ndoing git sync for " + repo );
+	shelljs.cd( repo );
+
+	if( shelljs.exec('git status' ).code !== 0 ) {
+	}
+}
+
+/*************************************************************************************************************
  * do the git sync
  */
 function doGitSync() {
@@ -150,6 +163,20 @@ function doGitSync() {
 
 	syncFolders["libs"].forEach( function( repo ) {
 		doOneGitSync( libsDir + repo );
+	});
+}
+
+/*************************************************************************************************************
+ * do the git sync
+ */
+function doGitStatus() {
+
+	syncFolders["main"].forEach( function( repo ) {
+		doOneGitStatus( rootDir + repo );
+	});
+
+	syncFolders["libs"].forEach( function( repo ) {
+		doOneGitStatus( libsDir + repo );
 	});
 }
 
@@ -167,6 +194,11 @@ function parseArgs( args) {
 
 		if( arg == "--gitSync" ) {
 			doGitSync();
+			return;
+		}
+
+		if( arg == "--gitStatus" ) {
+			doGitStatus();
 			return;
 		}
 

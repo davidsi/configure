@@ -133,6 +133,7 @@ function doOneGitSync( repo ) {
 	}
 
 	if( shelljs.exec('git stash pop' ).code !== 0 ) {
+		;
 	}
 
 	if( shelljs.exec('git commit -a -m "automated commit" ' ).code !== 0 ) {
@@ -151,13 +152,15 @@ function doOneGitSync( repo ) {
  */
 function doGitSync() {
 
-	syncFolders["main"].forEach( function( repo ) {
-		doOneGitSync( rootDir + repo );
-	});
+		doOneGitSync( rootDir + "configure" );
+		
+	// syncFolders["main"].forEach( function( repo ) {
+	// 	doOneGitSync( rootDir + repo );
+	// });
 
-	syncFolders["libs"].forEach( function( repo ) {
-		doOneGitSync( libsDir + repo );
-	});
+	// syncFolders["libs"].forEach( function( repo ) {
+	// 	doOneGitSync( libsDir + repo );
+	// });
 }
 
 /*************************************************************************************************************

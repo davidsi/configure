@@ -148,6 +148,8 @@ function writeScriptObjectsToFiles() {
 
 	raw = JSON.stringify( npmModules );	
 	fs.writeFileSync( configDir + "npmModules.json", raw, { "encoding" : "utf8" } );
+
+	console.log( "npmModules = " + raw );
 }
 
 /*************************************************************************************************************

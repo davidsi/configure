@@ -27,7 +27,7 @@ shelljs.cd( rootDir );
 /*************************************************************************************************************
  * set up a git repo
  */
-function setupGit( folder, repoName ) {
+function setupGit( folder, repoName, syncKey ) {
 
 	var target = folder + repoName;
 
@@ -45,7 +45,7 @@ function setupGit( folder, repoName ) {
 	  		shelljs.exit(1);
 		}
 
-		syncFolders[ syncKey].push( repo );
+		syncFolders[ syncKey ].push( repo );
 	}
 }
 
@@ -54,7 +54,7 @@ function setupGit( folder, repoName ) {
  */
 function doSetup( folder, repo, syncKey ) {
 
-	setupGit( folder, repo );
+	setupGit( folder, repo, syncKey );
 
 	var target     = folder + repo;
 	var repoConfig = getJSonObjectFromFile( target + "/" + "config.json", function() {

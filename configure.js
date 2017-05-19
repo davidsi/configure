@@ -132,7 +132,7 @@ function doOneGitSync( repo ) {
   		shelljs.exit(1);
 	}
 
-	console.log( "about to pop stack ");
+	console.log( "about to pop stack " );
 	if( shelljs.exec('git stash pop' ).code !== 0 ) {
 		;
 	}

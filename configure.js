@@ -45,7 +45,7 @@ function setupGit( folder, repoName, syncKey ) {
 	  		shelljs.exit(1);
 		}
 
-		syncFolders[ syncKey ].push( repo );
+		syncFolders[ syncKey ].push( repoName );
 	}
 }
 

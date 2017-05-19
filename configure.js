@@ -252,8 +252,6 @@ function writeScriptObjectsToFiles() {
 
 	raw = JSON.stringify( npmModules );	
 	fs.writeFileSync( configDir + "npmModules.json", raw, { "encoding" : "utf8" } );
-
-	console.log( "npmModules = " + raw );
 }
 
 /*************************************************************************************************************
@@ -286,8 +284,6 @@ function getScriptObjectsFromFiles() {
 		return object;
 
 	});
-
-	console.log( "sync folders:" + JSON.stringify( syncFolders ) );
 
 	// get the npm modules list
 	//

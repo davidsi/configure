@@ -132,10 +132,12 @@ function doOneGitSync( repo ) {
   		shelljs.exit(1);
 	}
 
+	console.log( "about to pop stack ");
 	if( shelljs.exec('git stash pop' ).code !== 0 ) {
 		;
 	}
 
+	console.log( " stack popped");
 	if( shelljs.exec('git commit -a -m "automated commit" ' ).code !== 0 ) {
   		console.log('Error: Git commit failed for ' + repo );
   		shelljs.exit(1);

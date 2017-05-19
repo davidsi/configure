@@ -70,8 +70,11 @@ function doSetup( folder, repo, syncKey ) {
 
 		npmModules = npmModules.concat( repoConfig["npm"].filter( newModule => {
 
-			if( npmModules.indexOf(newModule) < 0 ) {
+			if( npmModules.indexOf( newModule ) < 0 ) {
 				console.log( "adding " + newModule + " to npm list" );
+			}
+			else {
+				console.log( newModule + " already exists in npmModules " );
 			}
 			return( npmModules.indexOf(newModule) < 0 );
     	}));

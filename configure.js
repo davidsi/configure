@@ -40,7 +40,7 @@ function setupGit( folder, repoName, syncKey ) {
 		//
 		console.log( 'cloning ' +  'git clone https://github.com/davidsi/'+repoName+'.git '+target );
 
-		if( shelljs.exec('git clone https://github.com/davidsi/'+repoName+'.git '+'folder'+repoName).code !== 0 ) {
+		if( shelljs.exec('git clone https://github.com/davidsi/'+repoName+'.git '+ target ).code !== 0 ) {
 	  		console.log('Error: Git commit failed');
 	  		shelljs.exit(1);
 		}

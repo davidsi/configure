@@ -19,14 +19,15 @@ to set up one or more projects do the following:
 		<setup>
 
 setup can be one or more of the following (from setup.json):
-	'all'          : everything
-	'arduino-all   : all the arduino repositories
-	'boat-all'     : all arduino, hardware, ios and node repositories for the boat controller
-	'chippy-soc'   : complete chippy ruxpin project
-	'rov-all'	   : all the ROV project
-	'rov-soc'	   : just the node (chip) files for the ROV project
-	'weather-all'  : node and arduino files for weather station 
-	'weather-soc'  : just node (chip)  files for weather station 
+	'all'          	 : everything
+	'arduino-all     : all the arduino repositories
+	'big-red-button' : the big red button websocket server
+	'boat-all'       : all arduino, hardware, ios and node repositories for the boat controller
+	'chippy-soc'     : complete chippy ruxpin project
+	'rov-all'	     : all the ROV project
+	'rov-soc'        : just the node (chip) files for the ROV project
+	'weather-all'    : node and arduino files for weather station 
+	'weather-soc'    : just node (chip)  files for weather station 
 
 ----------------------------------------------------------------------------------------------------------------------------
 typically repositories names are 
@@ -45,6 +46,7 @@ the repositories are used as follows:
 	'boat-devices'    : devices (node) running on a laptop, or base code such as nodeBaseServer that can be copied
 	'boat-ios'        : ios controller for boat controller
 	'boat-server'     : the server for the boat, connects all devices, iOS, iKommunicate etc
+						this also has various big red button utils, such as the music player
 	'chippy'		  : chippy ruxpin node code
 	'configure'       : master setup
 	'gmail-example'   : for creating apps transmitting by mail, such as the qcyc fleet captain app

@@ -304,8 +304,6 @@ function getScriptObjectsFromFiles() {
 		console.log( "Can not continue, no setup.json." );
 		process.exit(1);
 	});
-
-	console.log( "setup json:" + JSON.stringify( setupModel ) );
 }
 
 /*************************************************************************************************************

@@ -10,7 +10,7 @@
 	"big-red-button" : {
 		"git": ["big-red-button"],
 		"git-libs": ["node-lib"]
-	}
+	},
 	"boat-all": {
 		"git": ["weather-station", "boat-arduino", "boat-devices", "boat-ios", "boat-server", "hardware"],
 		"git-libs": ["node-lib", "arduino-lib"]

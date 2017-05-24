@@ -297,8 +297,6 @@ function getScriptObjectsFromFiles() {
 		return object;
 	});
 
-	console.log( "npm modules:" + JSON.stringify( npmModules ) );
-
 	// get the json file that contains the various requirements for each possible setup
 	//
 	setupModel = getJSonObjectFromFile( configDir + "setup.json", function() {

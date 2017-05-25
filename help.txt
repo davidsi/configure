@@ -23,6 +23,7 @@ setup can be one or more of the following (from setup.json):
 	'arduino-all     : all the arduino repositories
 	'big-red-button' : the big red button websocket server
 	'boat-all'       : all arduino, hardware, ios and node repositories for the boat controller
+	'boat-server'    : the server for the boat
 	'chippy-soc'     : complete chippy ruxpin project
 	'rov-all'	     : all the ROV project
 	'rov-soc'        : just the node (chip) files for the ROV project

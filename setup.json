@@ -15,6 +15,10 @@
 		"git": ["weather-station", "boat-arduino", "boat-devices", "boat-ios", "boat-server", "hardware"],
 		"git-libs": ["node-lib", "arduino-lib"]
 	},
+	"boat-server": {
+		"git": ["boat-server"],
+		"git-libs": ["node-lib"]
+	},
 	"chippy-soc": {
 		"git": ["chippy"],
 		"git-libs": ["node-lib"]

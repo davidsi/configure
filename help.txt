@@ -54,7 +54,7 @@ the repositories are used as follows:
 	'hardware'        : 3d print and scematics
 	'rov-arduino'     : arduino section of the rov
 	'rov-node'		  : node section of ROV - includes both controller and sub
-	'weather-station' : the chip (node) code for the weather device
+	'weather-soc'     : the chip (node) code for the weather device
 
 the following are archived
 	chip-controller

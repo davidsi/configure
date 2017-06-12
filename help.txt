@@ -44,7 +44,7 @@ the repositories are used as follows:
 	'node-lib'		  : node library
 
 	'boat-arduino'    : all arduino projects for the boat controller
-	'boat-devices'    : devices (node) running on a laptop, or base code such as nodeBaseServer that can be copied
+	'boat-soc-common' : common code shared among one or more soc devices. Not used by all.
 	'boat-ios'        : ios controller for boat controller
 	'boat-server'     : the server for the boat, connects all devices, iOS, iKommunicate etc
 						this also has various big red button utils, such as the music player

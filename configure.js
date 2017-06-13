@@ -13,7 +13,7 @@ var originalRootDir = undefined;
 var rootDir         = undefined;
 var configDir       = undefined;
 var libsDir         = undefined;
-var syncFolders     = undefined;
+var syncInfo        = undefined;
 var npmModules      = undefined;
 var setupModel      = undefined;
 var newNpmModules   = [];
@@ -45,7 +45,7 @@ function setupGit( folder, repoName, syncKey ) {
 	  		shelljs.exit(1);
 		}
 
-		syncFolders[ syncKey ].push( repoName );
+		syncInfo[ syncKey ].push( repoName );
 	}
 }
 
@@ -122,6 +122,14 @@ function doOneGitSync( repo ) {
 	console.log( "doing git sync for " + repo );
 	shelljs.cd( repo );
 
+	if( syncInfo["user-name"] !== undefined ) {
+		shelljs.exec('git config user.name ' +  syncInfo["user-name"] );
+	}
+
+	if( syncInfo["user-email"] !== undefined ) {
+		shelljs.exec('git config user.email ' +  syncInfo["user-email"] );
+	}
+
 	if( shelljs.exec('git stash save' ).code !== 0 ) {
 	}
 
@@ -157,11 +165,11 @@ function doOneGitStatus( repo ) {
  */
 function doGitSync() {
 
-	syncFolders["main"].forEach( function( repo ) {
+	syncInfo["main"].forEach( function( repo ) {
 		doOneGitSync( rootDir + repo );
 	});
 
-	syncFolders["libs"].forEach( function( repo ) {
+	syncInfo["libs"].forEach( function( repo ) {
 		doOneGitSync( libsDir + repo );
 	});
 }
@@ -171,11 +179,11 @@ function doGitSync() {
  */
 function doGitStatus() {
 
-	syncFolders["main"].forEach( function( repo ) {
+	syncInfo["main"].forEach( function( repo ) {
 		doOneGitStatus( rootDir + repo );
 	});
 
-	syncFolders["libs"].forEach( function( repo ) {
+	syncInfo["libs"].forEach( function( repo ) {
 		doOneGitStatus( libsDir + repo );
 	});
 }
@@ -199,12 +207,35 @@ function doNpmUpdate() {
 	});
 }
 
+/**
+ * set up the git info for the repositories
+ *
+ * args[idx] is the name
+ * args[idx+1] is the email
+ */
+function setSyncInfo( args, idx ) {
+
+	if( idx + 1 >= args.length ) {
+		console.log( "not enough arguments" );
+		return args.length + 1;
+	}
+
+	syncInfo["user-name"]  = args[idx];
+	syncInfo["user-email"] = args[idx+1];
+
+	return idx+2;
+}
+
 /*************************************************************************************************************
  * parse the arguments
  */
-function parseArgs( args) {
+function parseArgs( args ) {
 
-	args.map( function( arg ) {
+	var count = args.length;
+	var idx   = 0;
+
+	while( idx < count ) {
+		var arg = args[idx++];
 
 		if( arg == "--help" ) {
 			showHelp();
@@ -213,28 +244,31 @@ function parseArgs( args) {
 
 		if( arg == "--gitSync" ) {
 			doGitSync();
-			return;
 		}
 
-		if( arg == "--gitStatus" ) {
+		else if( arg == "--gitStatus" ) {
 			doGitStatus();
-			return;
 		}
 
-		if( arg == "--npm" ) {
+		else if( arg == "--npm" ) {
 			doNpmUpdate();
-			return;
 		}
 
-		var data = setupModel[arg];
-
-		if( data === undefined ) {
-			console.log( "can not find setup info for " + arg );
+		else if( arg == "-gitInfo" ) {
+			idx = setSyncInfo( args, idx );
 		}
+
 		else {
-			setupConfig( data );
+			var data = setupModel[arg];
+
+			if( data === undefined ) {
+				console.log( "can not find setup info for " + arg );
+			}
+			else {
+				setupConfig( data );
+			}
 		}
-	});
+	}
 
 	// Object.keys(setupModel).map( function( key ) {
 
@@ -247,7 +281,7 @@ function parseArgs( args) {
  */
 function writeScriptObjectsToFiles() {
 
-	var raw = JSON.stringify( syncFolders );
+	var raw = JSON.stringify( syncInfo );
 	fs.writeFileSync( configDir + "git-sync.json", raw, { "encoding" : "utf8" } );
 
 	raw = JSON.stringify( npmModules );	
@@ -279,7 +313,7 @@ function getScriptObjectsFromFiles() {
 
 	// see if the main sync script exists, if it does, read it in. If not, well, don't :-)
 	//
-	syncFolders = getJSonObjectFromFile( configDir + "git-sync.json", function() {
+	syncInfo = getJSonObjectFromFile( configDir + "git-sync.json", function() {
 		var object = { "main" : ["configure"], "libs" : []} ;
 		return object;
 

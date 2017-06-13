@@ -16,6 +16,9 @@ to set up one or more projects do the following:
 		--gitSync
 		--gitStatus
 		--npm
+
+		-gitInfo user.name user.email
+		
 		<setup>
 
 setup can be one or more of the following (from setup.json):

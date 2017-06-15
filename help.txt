@@ -25,9 +25,12 @@ setup can be one or more of the following (from setup.json):
 	'all'          	 : everything
 	'arduino-all     : all the arduino repositories
 	'big-red-button' : the big red button websocket server
+	'ble-ssid-soc'   : the soc side of the SSID changer
 	'boat-all'       : all arduino, hardware, ios and node repositories for the boat controller
 	'boat-server'    : the server for the boat
-	'chippy-soc'     : complete chippy ruxpin project
+	'chippy-all'     : all of chippy ruxpin project
+	'chippy-soc'     : SOC part of chippy ruxpin project
+	'ios'            : all the ios projects
 	'rov-all'	     : all the ROV project
 	'rov-soc'        : just the node (chip) files for the ROV project
 	'weather-all'    : node and arduino files for weather station 
@@ -51,7 +54,8 @@ the repositories are used as follows:
 	'boat-ios'        : ios controller for boat controller
 	'boat-server'     : the server for the boat, connects all devices, iOS, iKommunicate etc
 						this also has various big red button utils, such as the music player
-	'chippy'		  : chippy ruxpin node code
+	'ble-ssid-soc'    : allow a soc to change the SSID via BLE
+	'chippy-soc'	  : chippy ruxpin node code
 	'configure'       : master setup
 	'gmail-example'   : for creating apps transmitting by mail, such as the qcyc fleet captain app
 	'hardware'        : 3d print and scematics

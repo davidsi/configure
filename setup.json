@@ -1,6 +1,6 @@
 {
 	"all": {
-		"git": ["boat-arduino", "boat-soc-common", "boat-ios", "boat-server", "chippy", "gmail-example", "hardware", "rov-arduino", "rov-node", "weather-station"],
+		"git": ["boat-arduino", "boat-soc-common", "ios", "boat-server", "ble-ssid-soc", "chippy-soc", "gmail-example", "hardware", "rov-arduino", "rov-node", "weather-station"],
 		"git-libs": ["node-lib", "arduino-lib"]
 	},
 	"arduino-all": {
@@ -8,35 +8,49 @@
 		"git-libs": ["arduino-lib"]
 	},
 	"big-red-button" : {
-		"git": ["big-red-button"],
+		"git": ["big-red-button", "ble-ssid-soc"],
 		"git-libs": ["node-lib"]
 	},
 	"boat-all": {
-		"git": ["weather-station", "boat-arduino", "boat-soc-common", "boat-ios", "boat-server", "hardware"],
+		"git": ["weather-station", "boat-arduino", "boat-soc-common", "ios", "boat-server", "hardware", "ble-ssid-soc"],
 		"git-libs": ["node-lib", "arduino-lib"]
 	},
 	"boat-server": {
 		"git": ["boat-server", "boat-soc-common"],
 		"git-libs": ["node-lib"]
 	},
-	"chippy-soc": {
-		"git": ["chippy"],
+	"ble-ssid-soc": {
+		"git": ["ble-ssid-soc"],
 		"git-libs": ["node-lib"]
 	},
+	"chippy-all" : {
+		"git": ["chippy-soc", "ble-ssid-soc", "ios"],
+		"git-libs": ["node-lib"]
+	},
+	"chippy-soc": {
+		"git": ["chippy-soc", "ble-ssid-soc"],
+		"git-libs": ["node-lib"]
+	},
+	"ios" : {
+		"git" : ["ios"]
+	},
+	"ble" : {
+		"git": ["ios", "ble-ssid-soc"]
+	},
 	"rov-all" : {
-		"git": ["rov-arduino", "rov-node"],
+		"git": ["rov-arduino", "rov-node", "ble-ssid-soc"],
 		"git-libs": ["node-lib", "arduino-lib"]
 	},
 	"rov-soc" : {
-		"git": ["rov-node"],
+		"git": ["rov-node", "ble-ssid-soc"],
 		"git-libs": ["node-lib"]
 	},
 	"weather-all": {
-		"git": ["weather-station", "boat-arduino"],
+		"git": ["weather-station", "boat-arduino", "ble-ssid-soc"],
 		"git-libs": ["node-lib", "arduino-lib"]
 	},
 	"weather-soc": {
-		"git": ["weather-station"],
+		"git": ["weather-station", "ble-ssid-soc"],
 		"git-libs": ["node-lib"]
 	}
 }

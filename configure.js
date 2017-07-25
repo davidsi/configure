@@ -103,10 +103,15 @@ function setupConfig( data ) {
 	var git     = data["git"];
 
 	console.log( "git libs: ");
-	gitLibs.map( function( libRepro ) {
-		doSetup( libsDir, libRepro, "libs" );
-	});
-
+	if( gitLibs === undefined || gitLibs === null ) {
+		console.log( "no libs required" );
+	}
+	else {
+		gitLibs.map( function( libRepro ) {
+			doSetup( libsDir, libRepro, "libs" );
+		});
+	}	
+	
 	console.log( "git: ");
 	git.map( function( repro ) {
 		doSetup( rootDir, repro, "main" );

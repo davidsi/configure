@@ -27,7 +27,7 @@ shelljs.cd( rootDir );
 /*************************************************************************************************************
  * set up a git repo
  */
-function setupGit( folder, repoName, syncKey ) {
+function setupGit( folder, repoName ) {
 
 	var target = folder + repoName;
 
@@ -45,16 +45,16 @@ function setupGit( folder, repoName, syncKey ) {
 	  		shelljs.exit(1);
 		}
 
-		syncInfo[ syncKey ].push( repoName );
+		syncInfo["repositories"].push( repoName );
 	}
 }
 
 /*************************************************************************************************************
  * set up a repp
  */
-function doSetup( folder, repo, syncKey ) {
+function doSetup( folder, repo ) {
 
-	setupGit( folder, repo, syncKey );
+	setupGit( folder, repo );
 
 	var target     = folder + repo;
 	var repoConfig = getJSonObjectFromFile( target + "/" + "config.json", function() {
@@ -93,19 +93,6 @@ function doSetup( folder, repo, syncKey ) {
 		}
 	}
 }
-
-/*************************************************************************************************************
- * set up a config
- */
-
-// function setupConfig( data ) {
-
-// 	var git = data["git"];
-
-// 	git.map( function( repro ) {
-// 		doSetup( rootDir, repro, "main" );
-// 	});
-// }
 
 /*************************************************************************************************************
  * do the git sync for one folder
@@ -159,12 +146,8 @@ function doOneGitStatus( repo ) {
  */
 function doGitSync() {
 
-	syncInfo["main"].forEach( function( repo ) {
+	syncInfo["repositories"].forEach( function( repo ) {
 		doOneGitSync( rootDir + repo );
-	});
-
-	syncInfo["libs"].forEach( function( repo ) {
-		doOneGitSync( libsDir + repo );
 	});
 }
 
@@ -173,13 +156,9 @@ function doGitSync() {
  */
 function doGitStatus() {
 
-	syncInfo["main"].forEach( function( repo ) {
+	syncInfo["repositories"].forEach( function( repo ) {
 		doOneGitStatus( rootDir + repo );
 	});
-
-	// syncInfo["libs"].forEach( function( repo ) {
-	// 	doOneGitStatus( libsDir + repo );
-	// });
 }
 
 /*************************************************************************************************************
@@ -269,12 +248,12 @@ function parseArgs( args ) {
 			group = setupModel[group]["git"];
 
 			for( repo in group ) {
-				doSetup( rootDir, group[repo], "main" );
+				doSetup( rootDir, group[repo] );
 			}
 		}
 
 		else {
-			doSetup( rootDir, arg, "main" );
+			doSetup( rootDir, arg );
 		}
 	}
 
@@ -322,7 +301,7 @@ function getScriptObjectsFromFiles() {
 	// see if the main sync script exists, if it does, read it in. If not, well, don't :-)
 	//
 	syncInfo = getJSonObjectFromFile( configDir + "git-sync.json", function() {
-		var object = { "main" : ["configure"], "libs" : []} ;
+		var object = { "repositories" : ["configure"] } ;
 		return object;
 
 	});

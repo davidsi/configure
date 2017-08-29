@@ -1,39 +1,31 @@
 {
 	"all": {
-		"git": ["boat-arduino", "boat-soc-common", "ios", "boat-server", "ble-ssid-soc", "chippy-soc", "gmail-example", "boat-hardware", "rov-hardware", "rov-arduino", "rov-server-soc", "rov-topside", "weather-station"],
-		"git-libs": ["node-lib", "arduino-lib"]
+		"git": ["boat-arduino", "boat-soc-common", "ios", "boat-server", "ble-ssid-soc", "chippy-soc", "gmail-example", "boat-hardware", "rov-hardware", "rov-arduino", "rov-server-soc", "rov-topside", "weather-station", "node-lib", "arduino-lib"]
 	},
 	"arduino-all": {
-		"git": ["boat-arduino", "rov-arduino"],
-		"git-libs": ["arduino-lib"]
+		"git": ["boat-arduino", "rov-arduino", "arduino-lib"]
 	},
 	"big-red-button" : {
-		"git": ["big-red-button", "ble-ssid-soc"],
-		"git-libs": ["node-lib"],
+		"git": ["big-red-button", "ble-ssid-soc", "node-lib"],
 		"meta-project" : "big red button"
 	},
 	"boat-all": {
-		"git": ["weather-station", "boat-arduino", "boat-soc-common", "ios", "boat-server", "boat-hardware", "ble-ssid-soc"],
-		"git-libs": ["node-lib", "arduino-lib"],
+		"git": ["weather-station", "boat-arduino", "boat-soc-common", "ios", "boat-server", "boat-hardware", "ble-ssid-soc", "node-lib", "arduino-lib"],
 		"meta-project" : "boat controller"
 	},
 	"boat-server": {
-		"git": ["boat-server", "boat-soc-common"],
-		"git-libs": ["node-lib"],
+		"git": ["boat-server", "boat-soc-common", "node-lib"],
 		"meta-project" : "boat controller"
 	},
 	"ble-ssid-soc": {
-		"git": ["ble-ssid-soc"],
-		"git-libs": ["node-lib"]
+		"git": ["ble-ssid-soc", "node-lib"]
 	},
 	"chippy-all" : {
-		"git": ["chippy-soc", "ble-ssid-soc", "ios"],
-		"git-libs": ["node-lib"],
+		"git": ["chippy-soc", "ble-ssid-soc", "ios", "node-lib"],
 		"meta-project" : "chippy"
 	},
 	"chippy-soc": {
-		"git": ["chippy-soc", "ble-ssid-soc"],
-		"git-libs": ["node-lib"],
+		"git": ["chippy-soc", "ble-ssid-soc", "node-lib"],
 		"meta-project" : "chippy"
 	},
 	"development": {
@@ -49,23 +41,19 @@
 		"git": ["ios", "ble-ssid-soc"]
 	},
 	"rov-all" : {
-		"git": ["rov-arduino", "rov-server-soc", "rov-topside", "ble-ssid-soc", "rov-hardware"],
-		"git-libs": ["node-lib", "arduino-lib"],
+		"git": ["rov-arduino", "rov-server-soc", "rov-topside", "ble-ssid-soc", "rov-hardware", "node-lib", "arduino-lib"],
 		"meta-project" : "rov"
 	},
 	"rov-soc" : {
-		"git": ["rov-server-soc", "ble-ssid-soc"],
-		"git-libs": ["node-lib"],
+		"git": ["rov-server-soc", "ble-ssid-soc", "node-lib"],
 		"meta-project" : "rov"
 	},
 	"weather-all": {
-		"git": ["weather-station", "boat-arduino", "ble-ssid-soc"],
-		"git-libs": ["node-lib", "arduino-lib"],
+		"git": ["weather-station", "boat-arduino", "ble-ssid-soc", "node-lib", "arduino-lib"],
 		"meta-project" : "boat controller"
 	},
 	"weather-soc": {
-		"git": ["weather-station", "ble-ssid-soc"],
-		"git-libs": ["node-lib"],
+		"git": ["weather-station", "ble-ssid-soc", "boat-soc-common", "node-lib"],
 		"meta-project" : "boat controller"
 	}
 }

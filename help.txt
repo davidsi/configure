@@ -16,11 +16,12 @@ to set up one or more projects do the following:
 		--gitSync
 		--gitStatus
 		--npm
+		--all
 		-gitInfo user.name user.email
 		
 		<setup>
 
-setup can be one or more of the following (from setup.json):
+setup can be one or more of the following (from setup.json): THIS IS NO LONGER TRUE - THE GIT FOLDERS DIRECTLY ARE USED (except for --all)
 	'all'          	 : everything
 	'arduino-all     : all the arduino repositories
 	'big-red-button' : the big red button websocket server

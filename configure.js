@@ -97,26 +97,15 @@ function doSetup( folder, repo, syncKey ) {
 /*************************************************************************************************************
  * set up a config
  */
-function setupConfig( data ) {
 
-	var gitLibs = data["git-libs"];
-	var git     = data["git"];
+// function setupConfig( data ) {
 
-	console.log( "git libs: ");
-	if( gitLibs === undefined || gitLibs === null ) {
-		console.log( "no libs required" );
-	}
-	else {
-		gitLibs.map( function( libRepro ) {
-			doSetup( libsDir, libRepro, "libs" );
-		});
-	}	
-	
-	console.log( "git: ");
-	git.map( function( repro ) {
-		doSetup( rootDir, repro, "main" );
-	});
-}
+// 	var git = data["git"];
+
+// 	git.map( function( repro ) {
+// 		doSetup( rootDir, repro, "main" );
+// 	});
+// }
 
 /*************************************************************************************************************
  * do the git sync for one folder
@@ -188,9 +177,9 @@ function doGitStatus() {
 		doOneGitStatus( rootDir + repo );
 	});
 
-	syncInfo["libs"].forEach( function( repo ) {
-		doOneGitStatus( libsDir + repo );
-	});
+	// syncInfo["libs"].forEach( function( repo ) {
+	// 	doOneGitStatus( libsDir + repo );
+	// });
 }
 
 /*************************************************************************************************************
@@ -212,7 +201,7 @@ function doNpmUpdate() {
 	});
 }
 
-/**
+/**************************************************************************************************************
  * set up the git info for the repositories
  *
  * args[idx] is the name
@@ -263,15 +252,29 @@ function parseArgs( args ) {
 			idx = setSyncInfo( args, idx );
 		}
 
-		else {
-			var data = setupModel[arg];
+		else if( arg == "-configure" ) {
 
-			if( data === undefined ) {
-				console.log( "can not find setup info for " + arg );
+			var group = args[idx++];
+
+			if( setupModel[group] === undefined ) {
+				console.log( "group " + group + " not recognised" );
+				return;
 			}
-			else {
-				setupConfig( data );
+
+			if( setupModel[group]["git"] === undefined ) {
+				console.log( "group " + group + " has no git repo list" );
+				return;
 			}
+
+			group = setupModel[group]["git"];
+
+			for( repo in group ) {
+				doSetup( rootDir, group[repo], "main" );
+			}
+		}
+
+		else {
+			doSetup( rootDir, arg, "main" );
 		}
 	}
 
@@ -306,15 +309,15 @@ function getScriptObjectsFromFiles() {
 		process.exit(0);
 	}
 
-	// make sure that the libs directory exists
-	//
-	if( fs.existsSync( libsDir ) == false ) {
-		console.log( "creating libs folder" );
-		fs.mkdirSync( libsDir, 0744);
-	}
-	else {
-		console.log( "libs folder exists" );
-	}
+	// // make sure that the libs directory exists
+	// //
+	// if( fs.existsSync( libsDir ) == false ) {
+	// 	console.log( "creating libs folder" );
+	// 	fs.mkdirSync( libsDir, 0744);
+	// }
+	// else {
+	// 	console.log( "libs folder exists" );
+	// }
 
 	// see if the main sync script exists, if it does, read it in. If not, well, don't :-)
 	//

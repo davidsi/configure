@@ -45,12 +45,12 @@ function doSetEvironmentVariable( envVar ) {
 		//
 		var fileContents = "";
 
-		if( fs.existsSync( "~/etc/environment" ) ) {
-			fileContents = fs.readFileSync( "~/etc/environment" );
+		if( fs.existsSync( "/etc/environment" ) ) {
+			fileContents = fs.readFileSync( "/etc/environment" );
 		}
 		fileContents = fileContents + "\ndms-project="+envVar+"\n";
 
-		fs.writeFileSync( "~/etc/environment", fileContents, { "encoding" : "utf8" } );		
+		fs.writeFileSync( "/etc/environment", fileContents, { "encoding" : "utf8" } );		
 	}
 }
 

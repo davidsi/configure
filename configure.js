@@ -4,6 +4,7 @@
 var fs      = require('fs');
 var prompt  = require('prompt');
 var shelljs = require('shelljs');
+var os      = require('os');
 
 // allow user interaction
 //
@@ -17,12 +18,64 @@ var syncInfo        = undefined;
 var npmModules      = undefined;
 var setupModel      = undefined;
 var newNpmModules   = [];
+var osType          = 0;		// 0: not known 1 : OSX, 2:linux
+
+findOS();
+doSetEvironmentVariable( "flybridge-device");
+return;
 
 moveToRoot( process.argv[1] );
 getScriptObjectsFromFiles();
 parseArgs( process.argv.slice(2) );
 writeScriptObjectsToFiles();
 shelljs.cd( rootDir );
+
+**********************************************************************************************
+ * set the environment variable for projects
+ */
+function doSetEvironmentVariable( envVar ) {
+
+	if( osType == 1 ) {
+		// os x
+		//
+
+	}
+	else if( osType == 2 ) {
+		// linux
+		//
+		var fileContents = "";
+
+		if( fs.existsSync( "~/etc/environment" ) ) {
+			fileContents = fs.readFileSync( "~/etc/environment" );
+		}
+		fileContents = fileContents + "\ndms-project="+envVar+"\n";
+
+		fs.writeFileSync( "~/etc/environment", fileContents, { "encoding" : "utf8" } );		
+	}
+}
+
+/*************************************************************************************************************
+ * find the os version
+ */
+function findOS() {
+
+	console.log( 'OS detected is: '+os.platform() );
+
+	var isWin   = /^win32/.test(os.platform());
+	var isLinux = /^linux/.test(os.platform());
+	var isMac   = /^darwin/.test(os.platform()) || /^freebsd/.test(os.platform());
+
+	if( isLinux ) {
+		if( !isWin && !isMac ) {
+			osType = 2;
+		}
+	}
+	else if( isMac ) {
+		if( !isLinux && !isWin ) {
+			osType = 1;
+		}
+	}
+}
 
 /*************************************************************************************************************
  * set up a git repo
@@ -204,21 +257,6 @@ function setSyncInfo( args, idx ) {
  */
 function parseArgs( args ) {
 
-	var os = require('os');
-	console.log( 'OS detected is: '+os.platform() );
-
-  var isWin = /^win32/.test(os.platform());
-  console.log ('isWin = '+isWin);
-
-  var isLinux = /^linux/.test(os.platform());
-  console.log ('isLinux = '+isLinux);
-
-  var isMac = /^darwin/.test(os.platform()) || /^freebsd/.test(os.platform());
-  console.log ('isMac = '+isMac);
-
-
-
-
 	var count = args.length;
 	var idx   = 0;
 
@@ -268,7 +306,7 @@ function parseArgs( args ) {
 
 			group = setupModel[group]["environment"];
 			if( group !== undefined ) {
-
+				doSetEvironmentVariable( group );
 			}
 		}
 

@@ -21,9 +21,6 @@ var newNpmModules   = [];
 var osType          = 0;		// 0: not known 1 : OSX, 2:linux
 
 findOS();
-doSetEvironmentVariable( "flybridge-device");
-return;
-
 moveToRoot( process.argv[1] );
 getScriptObjectsFromFiles();
 parseArgs( process.argv.slice(2) );
@@ -31,24 +28,27 @@ writeScriptObjectsToFiles();
 shelljs.cd( rootDir );
 
 /**********************************************************************************************
- * set the environment variable for projects
+ * set the environment variable for projects into DMS_PROJECT
  */
 function doSetEvironmentVariable( envVar ) {
 
 	if( osType == 1 ) {
 		// os x
+		// https://apple.stackexchange.com/questions/106355/setting-the-system-wide-path-environment-variable-in-mavericks
 		//
-
+		console.log( "Can not write env variable for OS X" );
 	}
 	else if( osType == 2 ) {
 		// linux
+		//
+		// https://stackoverflow.com/questions/13046624/how-to-permanently-export-a-variable-in-linux
 		//
 		var fileContents = "";
 
 		if( fs.existsSync( "/etc/environment" ) ) {
 			fileContents = fs.readFileSync( "/etc/environment" );
 		}
-		fileContents = fileContents + "\ndms-project="+envVar+"\n";
+		fileContents = fileContents + "\nDMS_PROJECT="+envVar+"\n";
 
 		fs.writeFileSync( "/etc/environment", fileContents, { "encoding" : "utf8" } );		
 	}

@@ -49,11 +49,16 @@
 		"meta-project" : "rov"
 	},
 	"weather-all": {
-		"git": ["weather-station", "boat-arduino", "ble-ssid-soc", "node-lib", "arduino-lib"],
+		"git": ["weather-station", "boat-arduino", "node-lib", "arduino-lib"],
 		"meta-project" : "boat controller"
 	},
 	"weather-soc": {
-		"git": ["weather-station", "ble-ssid-soc", "boat-soc-common", "node-lib"],
+		"git": ["weather-station", "boat-soc-common", "node-lib"],
 		"meta-project" : "boat controller"
+	},
+	"flybridge-soc": {
+		"git"          : ["weather-station", "boat-soc-common", "node-lib"],
+		"meta-project" : "boat controller",
+		"environment"  : "flybridge-device"
 	}
 }

@@ -204,6 +204,21 @@ function setSyncInfo( args, idx ) {
  */
 function parseArgs( args ) {
 
+	var os = require('os');
+	console.log( 'OS detected is: '+os.platform() );
+
+  var isWin = /^win32/.test(os.platform());
+  console.log ('isWin = '+isWin);
+
+  var isLinux = /^linux/.test(os.platform());
+  console.log ('isLinux = '+isLinux);
+
+  var isMac = /^darwin/.test(os.platform()) || /^freebsd/.test(os.platform());
+  console.log ('isMac = '+isMac);
+
+
+
+
 	var count = args.length;
 	var idx   = 0;
 
@@ -249,6 +264,11 @@ function parseArgs( args ) {
 
 			for( repo in group ) {
 				doSetup( rootDir, group[repo] );
+			}
+
+			group = setupModel[group]["environment"];
+			if( group !== undefined ) {
+
 			}
 		}
 

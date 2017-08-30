@@ -30,6 +30,7 @@ setup can be one or more of the following (from setup.json): THIS IS NO LONGER T
 	'boat-server'    : the server for the boat
 	'chippy-all'     : all of chippy ruxpin project
 	'chippy-soc'     : SOC part of chippy ruxpin project
+	'flybridge-soc'  : all the parts of the flybridge device
 	'ios'            : all the ios projects
 	'rov-all'	     : all the ROV project
 	'rov-soc'        : just the node (chip) files for the ROV project

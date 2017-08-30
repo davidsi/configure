@@ -30,7 +30,7 @@ parseArgs( process.argv.slice(2) );
 writeScriptObjectsToFiles();
 shelljs.cd( rootDir );
 
-**********************************************************************************************
+/**********************************************************************************************
  * set the environment variable for projects
  */
 function doSetEvironmentVariable( envVar ) {
